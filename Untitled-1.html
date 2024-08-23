@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>โปรแกรมสุ่มคำให้กำลังใจ</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Kanit', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f4f8;
+            box-sizing: border-box;
+        }
+        .container {
+            background-color: #ffffff;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+        }
+        h1 {
+            font-size: 2em;
+            color: #333333;
+            margin-bottom: 20px;
+        }
+        #word {
+            font-size: 1.5em;
+            margin: 20px 0;
+            color: #007BFF;
+        }
+        .spinner {
+            margin: 20px 0;
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(0, 123, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #007BFF;
+            animation: spin 1s ease-in-out infinite;
+            display: none;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        select, button {
+            padding: 12px;
+            font-size: 1.1em;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+        button {
+            color: #ffffff;
+            background-color: #007BFF;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>โปรแกรมสุ่มคำให้กำลังใจ</h1>
+        <select id="categorySelect">
+            <option value="exam">สอบ</option>
+            <option value="no_exam">ไม่สอบ</option>
+        </select>
+        <div id="word">กดปุ่มเพื่อสุ่มคำให้กำลังใจ</div>
+        <div class="spinner" id="spinner"></div>
+        <button onclick="generateWord()">สุ่มคำให้กำลังใจ</button>
+    </div>
+
+    <script>
+        const encouragementCategories = {
+            exam: [
+                "ทำเต็มที่นะ! ความพยายามไม่เคยทรยศใคร",
+                "อย่ากลัวที่จะผิดพลาด ทุกความพยายามคือการเรียนรู้",
+                "เชื่อในตัวเอง แล้วสิ่งที่ทำได้จะมากกว่าที่คิด",
+                "ความสำเร็จเริ่มจากก้าวแรก กล้าทำตามฝัน!"
+            ],
+            no_exam: [
+                "อย่าลืมพักผ่อนด้วยนะ! สุขภาพสำคัญที่สุด",
+                "ใช้เวลาให้คุ้มค่า ทำในสิ่งที่รัก",
+                "ทุกวันคือโอกาสใหม่ๆ ที่จะพัฒนาตัวเอง",
+                "จงมองไปข้างหน้าและทำในสิ่งที่ทำให้เรามีความสุข"
+            ]
+        };
+        
+        function generateWord() {
+            const category = document.getElementById('categorySelect').value;
+            const spinner = document.getElementById('spinner');
+            const wordDiv = document.getElementById('word');
+            
+            // Show spinner and hide the current word
+            spinner.style.display = 'block';
+            wordDiv.innerText = '';
+
+            setTimeout(() => {
+                const words = encouragementCategories[category];
+                const randomIndex = Math.floor(Math.random() * words.length);
+                
+                // Hide spinner and show the generated word
+                spinner.style.display = 'none';
+                wordDiv.innerText = words[randomIndex];
+            }, 2000); // 2 seconds delay
+        }
+    </script>
+</body>
+</html>
+
+
+
